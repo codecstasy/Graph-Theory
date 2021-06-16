@@ -2,7 +2,7 @@
 #define ll long long
 using namespace std;
 int cs;
-const ll inf=1000005;
+const ll inf=1000005; // Declaring infinity
 
 class graph {
 public:
@@ -15,12 +15,12 @@ public:
     ll bfs(ll s, ll ttl);
 };
 
-void graph::add_edge(ll u, ll v) {
-    g[u].push_back(v);
+void graph::add_edge(ll u, ll v) { // Function to add edges
+    g[u].push_back(v);  //for undirected graphs
     g[v].push_back(u);
 }
 
-void graph::clear() {g.clear();}
+void graph::clear() {g.clear();} // Function to clear the graph
 
 ll graph::bfs(ll source, ll ttl) {
     ll ans=0;
@@ -38,14 +38,13 @@ ll graph::bfs(ll source, ll ttl) {
                 nodes++;
                 vis[v]=1;
                 lev[v]=lev[u]+1;
-                if(lev[v]>ttl) ans++;
+                if(lev[v]>ttl) ans++;   // If TTL is less than the level of a node, increase ans
                 q.push(v);
             }
         }
     }
-    ans+=g.size()-nodes;
-    //cout << g.size() << endl << vis.size() << endl;
-    //cout << nodes << endl;
+    ans+=g.size()-nodes; //Nodes for forest graphs,
+                        //if some edges are not connected, their count should be added to the ans
     vis.clear();
     lev.clear();
     return ans;
